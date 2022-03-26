@@ -17,7 +17,7 @@
             <th>Paciente: </th>
             <th>Data: </th>
             <th>Hora: </th>
-            <th class="text-center" colspan="2">Ações</th>
+            <th class="text-center" colspan="3">Ações</th>
         </thead>
         <tbody>
             @foreach($consultas as $consulta)
@@ -26,10 +26,13 @@
                         <td class="align-middle">{{$consulta->dataMarcada}}</td>
                         <td class="align-middle">{{$consulta->horaMarcada}}</td>
                         <td class="text-center">
-                            <a href="{{route('agendar',['id'=>$consulta->id])}}" title="Editar"  type="button" class="btn btn-success"><i class="fas fa-user-edit"></i></a>
+                            <a href="{{route('agendar',['id'=>$consulta->id])}}" title="Editar consulta"  type="button" class="btn btn-success"><i class="fas fa-user-edit"></i></a>
                         </td>
                         <td class="text-center">
                             <a href="{{ route('consultaEfetuada', ['id'=>$consulta->id])}}" title="Marcar consulta como efetuada" type="button" class="btn btn-info"><i class="far fa-check-circle"></i></a>
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ route('apagarAgendamento', ['id'=>$consulta->id])}}" title="Deletar consulta" type="button" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
             @endforeach

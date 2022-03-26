@@ -9,7 +9,7 @@ use Illuminate\Auth\Events\Registered;
 
 class PacienteController extends Controller
 {
-    public function index(){
+    public function index() {
         $pacientes = Paciente::all();
         return view('paciente.lista_paciente', ['pacientes' => $pacientes]);
     }
@@ -24,7 +24,7 @@ class PacienteController extends Controller
         }
     }
 
-    public function criarAction(Request $request){
+    public function criarAction(Request $request) {
 
         
         $request->validate(
@@ -46,13 +46,7 @@ class PacienteController extends Controller
         return redirect()->back()->with('sucesso', 'Paciente inserido com sucesso');
     }
 
-    public function deletar(Request $request){
-
-        Paciente::find($request->id)->delete();
-        return redirect()->back();
-    }
-
-    public function editar(Request $request){
+    public function editar(Request $request) {
 
         Paciente::find($request->id)->update([
             'name'=>$request->name,
@@ -60,5 +54,11 @@ class PacienteController extends Controller
         ]);
 
         return redirect()->route('listaPaciente');
+    }
+
+    public function deletar(Request $request) {
+
+        Paciente::find($request->id)->delete();
+        return redirect()->back();
     }
 }

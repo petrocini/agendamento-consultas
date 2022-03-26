@@ -14,8 +14,7 @@ class AuthController extends Controller
         return view('login');
     }
 
-    public function login(Request $request)
-    {          
+    public function login(Request $request) {          
         $validator = Validator::make($request->all(), [
             'login' => 'required|exists:App\Models\User,login',
             'password' => 'required'

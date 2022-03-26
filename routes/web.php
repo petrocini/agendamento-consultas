@@ -23,6 +23,7 @@ Route::get('/home/agendamentos/{id?}', 'AgendamentoController@index')->name('age
 Route::post('/home/agendamentos/action', 'AgendamentoController@criar')->name('agendarAction');
 Route::get('/home/consulta_efetuada', 'AgendamentoController@efetuar')->name('consultaEfetuada');
 Route::post('/home/agendamentos/editar/{id?}', 'AgendamentoController@editar')->name('editarAgendamento');
+Route::get('/home/agendamentos/apagar_agendamento/{id?}', 'AgendamentoController@apagar')->name('apagarAgendamento');
 //Rotas para Pacientes
 Route::get('/home/lista_pacientes', 'PacienteController@index')->name('listaPaciente');
 Route::post('/home/lista_pacientes/editar_pacientes/action/{id}', 'PacienteController@editar')->name('editarPacienteAction');

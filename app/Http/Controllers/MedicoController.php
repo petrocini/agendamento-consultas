@@ -10,15 +10,13 @@ use Illuminate\Auth\Events\Registered;
 
 class MedicoController extends Controller
 {
-    public function index()
-    {
+    public function index() {
         $users = User::all();
 
         return view('medico.lista_medico', ['medicos' => $users]);
     }
 
-    public function criar(Request $request)
-    {
+    public function criar(Request $request) {
         if ($request->id == null) {
             return view('medico.registrar_medico');
         } else {
@@ -28,8 +26,7 @@ class MedicoController extends Controller
         }
     }
 
-    public function criarAction(Request $request)
-    {
+    public function criarAction(Request $request) {
 
         $request->validate(
             [
@@ -47,13 +44,13 @@ class MedicoController extends Controller
         $crm = $request->crm;
         $uf = $request->uf;
 
-        $crm_completo = $crm . '/' . $uf;
+        $crmCompleto = $crm . '/' . $uf;
 
         $user = User::create([
             'name' => $request->name,
             'login' => $request->login,
             'password' => Hash::make($request->password),
-            'crm' => $crm_completo
+            'crm' => $crmCompleto
         ]);
 
         $user->attachRole(2);
@@ -62,15 +59,7 @@ class MedicoController extends Controller
         return redirect()->back()->with('sucesso', 'Médico criado com sucesso');
     }
 
-    public function apagar(Request $request)
-    {
-
-        User::find($request->id)->delete();
-        return redirect()->back();
-    }
-
-    public function editar(Request $request)
-    {
+    public function editar(Request $request) {
 
         $request->validate(
             [
@@ -81,22 +70,27 @@ class MedicoController extends Controller
             ],
             [
                 'integer' => 'O CRM deve possuir somente números',
-                'unique' => 'O Usuário informado já está em uso.'
             ]
         );
 
         $crm = $request->crm;
         $uf = $request->uf;
 
-        $crm_completo = $crm . '/' . $uf;
+        $crmCompleto = $crm . '/' . $uf;
 
         User::find($request->id)->update([
             'name' => $request->name,
             'login' => $request->login,
             'password' => Hash::make($request->password),
-            'crm' => $crm_completo
+            'crm' => $crmCompleto
         ]);
 
         return redirect()->route('listaMedico')->with('sucesso', 'Médico editado com sucesso!');
+    }
+
+    public function apagar(Request $request) {
+
+        User::find($request->id)->delete();
+        return redirect()->back();
     }
 }

@@ -12,7 +12,7 @@ use Carbon;
 class AgendamentoController extends Controller
 {
 
-    public function index(Request $request){
+    public function index(Request $request) {
         if ($request->id == null) {
             $pacientes = Paciente::all();
             return view('agendamento', ['pacientes' => $pacientes]);
@@ -33,7 +33,7 @@ class AgendamentoController extends Controller
         $dia = Carbon\Carbon::now();
         $diaAtualString = $dia->toDateString();
 
-        if($diaAtualString > $data){
+        if ($diaAtualString > $data) {
             return redirect()->back()->with('erro', 'Não é possível marcar uma consulta para um dia anterior ao atual');
         }
 
@@ -53,17 +53,6 @@ class AgendamentoController extends Controller
         event(new Registered($agendamento));
 
         return redirect()->back();
-    }
-
-    public function efetuar(Request $request) {
-        $agendamento = Agendamento::find($request->id);
-
-        $agendamento->concluida = 1;
-
-        $agendamento->save();
-
-        return redirect()->back();
-        
     }
 
     public function editar(Request $request) {
@@ -89,5 +78,20 @@ class AgendamentoController extends Controller
         ]);
 
         return redirect()->route('home')->with('sucesso', 'Consulta editada com sucesso!');
+    }
+
+    public function efetuar(Request $request) {
+        $agendamento = Agendamento::find($request->id);
+
+        $agendamento->concluida = 1;
+
+        $agendamento->save();
+
+        return redirect()->back();
+    }
+
+    public function apagar(Request $request) {
+            Agendamento::find($request->id)->delete();
+            return redirect()->back();
     }
 }
