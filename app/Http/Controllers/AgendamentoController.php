@@ -52,7 +52,7 @@ class AgendamentoController extends Controller
 
         event(new Registered($agendamento));
 
-        return redirect()->back();
+        return redirect()->back()->with('sucesso', 'Agendamento realizado com sucesso');
     }
 
     public function editar(Request $request) {
@@ -61,13 +61,13 @@ class AgendamentoController extends Controller
         $diaAtualString = $dia->toDateString();
 
         if ($diaAtualString > $request->dataMarcada) {
-            return redirect()->back()->with('erro', 'Não é possível marcar uma consulta para um dia anterior ao atual');
+            return redirect()->back()->with('erro', 'Não é possível fazer um agendamento para um dia anterior ao atual');
         }
 
         if ($consulta = Agendamento::first() != null) {
             $consulta = Agendamento::first()->where('idMedico', Auth::user()->id)->where('dataMarcada', $request->dataMarcada)->where('horaMarcada', $request->horaMarcada)->where('concluida', 0)->get();
             if (count($consulta) > 0) {
-                return redirect()->back()->with('erro', 'Já existe uma consulta marcada neste horário');
+                return redirect()->back()->with('erro', 'Já existe um agendamento para este horário');
             }
         }
 
@@ -77,7 +77,7 @@ class AgendamentoController extends Controller
             'horaMarcada' => $request->horaMarcada
         ]);
 
-        return redirect()->route('home')->with('sucesso', 'Consulta editada com sucesso!');
+        return redirect()->route('home')->with('sucesso', 'Agendamento atualizado com sucesso');
     }
 
     public function efetuar(Request $request) {

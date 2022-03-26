@@ -10,7 +10,7 @@ use Illuminate\Auth\Events\Registered;
 
 class MedicoController extends Controller
 {
-    public function index() {
+    public function index(){
         $users = User::all();
 
         return view('medico.lista_medico', ['medicos' => $users]);
@@ -37,7 +37,7 @@ class MedicoController extends Controller
             ],
             [
                 'integer' => 'O CRM deve possuir somente números',
-                'unique' => 'O Usuário informado já está em uso.'
+                'unique' => 'O Usuário informado já está em uso'
             ]
         );
 
@@ -56,7 +56,7 @@ class MedicoController extends Controller
         $user->attachRole(2);
         event(new Registered($user));
 
-        return redirect()->back()->with('sucesso', 'Médico criado com sucesso');
+        return redirect()->back()->with('sucesso', 'Médico registrado com sucesso');
     }
 
     public function editar(Request $request) {
@@ -85,7 +85,7 @@ class MedicoController extends Controller
             'crm' => $crmCompleto
         ]);
 
-        return redirect()->route('listaMedico')->with('sucesso', 'Médico editado com sucesso!');
+        return redirect()->route('listaMedico')->with('sucesso', 'Médico atualizado com sucesso!');
     }
 
     public function apagar(Request $request) {

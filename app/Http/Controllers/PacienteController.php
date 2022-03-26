@@ -43,7 +43,7 @@ class PacienteController extends Controller
 
         event(new Registered($paciente));
 
-        return redirect()->back()->with('sucesso', 'Paciente inserido com sucesso');
+        return redirect()->back()->with('sucesso', 'Paciente registrado com sucesso');
     }
 
     public function editar(Request $request) {

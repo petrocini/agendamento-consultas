@@ -17,15 +17,22 @@
         </div>
         <div class="form-group">
             <label class="label title" for="validate">Data da consulta: </label>
-            <input class="form-control" type="date" name="dataMarcada" @if($edit ?? '') value="{{$consulta->dataMarcada}}" @endif>
+            <input class="form-control" type="date" name="dataMarcada" @if($edit ?? '') value="{{$consulta->dataMarcada}}" @endif required>
         </div>
         <div class="form-group">
             <label class="label title" for="validate">Horário da consulta: </label>
-            <input class="form-control" type="time" name="horaMarcada" @if($edit ?? '') value="{{$consulta->horaMarcada}}" @endif>
+            <input class="form-control" type="time" name="horaMarcada" @if($edit ?? '') value="{{$consulta->horaMarcada}}" @endif required>
         </div>
         <div class="form-group">
             <input type="submit" class="btn btn-primary" @if($edit ?? '') value="Editar" @else value="Agendar" @endif>
         </div>
+
+        @if (session('sucesso'))
+            <div class="alert alert-success" role="alert">
+                {{session('sucesso')}}
+            </div>
+        @endif
+
         @if (session('erro'))
             <div class="alert alert-danger" role="alert">
                 {{session('erro')}}
