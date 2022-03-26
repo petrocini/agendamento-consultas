@@ -15,15 +15,15 @@ class CreateAgendamentosTable extends Migration
     {
         Schema::create('agendamentos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('med_id');
-            $table->unsignedBigInteger('pac_id');
-            $table->foreign('med_id')->references('id')->on('users')
+            $table->unsignedBigInteger('idMedico');
+            $table->unsignedBigInteger('idPaciente');
+            $table->foreign('idMedico')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('pac_id')->references('id')->on('pacientes')
+            $table->foreign('idPaciente')->references('id')->on('pacientes')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->date('data_consulta');
-            $table->time('horario_consulta');
-            $table->boolean('efetuada')->default(0);
+            $table->date('dataMarcada');
+            $table->time('horaMarcada');
+            $table->boolean('concluida')->default(0);
             $table->timestamps();
         });
     }

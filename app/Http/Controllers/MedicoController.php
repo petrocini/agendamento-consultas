@@ -59,7 +59,7 @@ class MedicoController extends Controller
         $user->attachRole(2);
         event(new Registered($user));
 
-        return redirect()->back()->with('sucess', 'Médico criado com sucesso');
+        return redirect()->back()->with('sucesso', 'Médico criado com sucesso');
     }
 
     public function apagar(Request $request)
@@ -97,6 +97,6 @@ class MedicoController extends Controller
             'crm' => $crm_completo
         ]);
 
-        return redirect()->route('listaMedico')->with('sucess', 'Médico editado com sucesso!');
+        return redirect()->route('listaMedico')->with('sucesso', 'Médico editado com sucesso!');
     }
 }

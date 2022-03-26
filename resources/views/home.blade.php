@@ -23,8 +23,8 @@
             @foreach($consultas as $consulta)
                     <tr>
                         <td class="align-middle">{{$consulta->paciente->name}}</td>
-                        <td class="align-middle">{{$consulta->data_consulta}}</td>
-                        <td class="align-middle">{{$consulta->horario_consulta}}</td>
+                        <td class="align-middle">{{$consulta->dataMarcada}}</td>
+                        <td class="align-middle">{{$consulta->horaMarcada}}</td>
                         <td class="text-center">
                             <a href="{{route('agendar',['id'=>$consulta->id])}}" title="Editar"  type="button" class="btn btn-success"><i class="fas fa-user-edit"></i></a>
                         </td>
@@ -35,9 +35,9 @@
             @endforeach
         </tbody>
     </table>
-    @if (session('msg'))
+    @if (session('sucesso'))
         <div class="alert alert-success" role="alert">
-            {{session('msg')}}
+            {{session('sucesso')}}
         </div>
     @endif
 @endif

@@ -11,11 +11,12 @@ use Carbon;
 
 class AgendamentoController extends Controller
 {
+
     public function index(Request $request){
-        if($request->id == null){
+        if ($request->id == null) {
             $pacientes = Paciente::all();
             return view('agendamento', ['pacientes' => $pacientes]);
-        }else{
+        } else {
             $pacientes = Paciente::all();
             $consulta = Agendamento::find($request->id);
             $edit = true;
@@ -23,30 +24,30 @@ class AgendamentoController extends Controller
         }
     }
 
-    public function criar(Request $request){
+    public function criar(Request $request) {
         $medico = Auth::user()->id;
         $paciente = $request->paciente;
-        $data = $request->data_consulta;
-        $time = $request->horario_consulta;
+        $data = $request->dataMarcada;
+        $time = $request->horaMarcada;
 
         $dia = Carbon\Carbon::now();
-        $dia_atual = $dia->toDateString();
+        $diaAtualString = $dia->toDateString();
 
-        if($dia_atual > $data){
-            return redirect()->back()->with('warning', 'Não é possível marcar uma consulta para um dia anterior ao atual');
+        if($diaAtualString > $data){
+            return redirect()->back()->with('erro', 'Não é possível marcar uma consulta para um dia anterior ao atual');
         }
 
-        if($consulta = Agendamento::first() != null){
-            $consulta = Agendamento::first()->where('med_id', $medico)->where('data_consulta', $data)->where('horario_consulta', $time)->where('efetuada', 0)->get();
+        if ($consulta = Agendamento::first() != null) {
+            $consulta = Agendamento::first()->where('idMedico', $medico)->where('dataMarcada', $data)->where('horaMarcada', $time)->where('concluida', 0)->get();
             if(count($consulta) > 0){
-                return redirect()->back()->with('warning', 'Já existe uma consulta marcada neste horário');
+                return redirect()->back()->with('erro', 'Já existe uma consulta marcada neste horário');
             }
         }
         $agendamento = Agendamento::create([
-            'med_id' => $medico,
-            'pac_id' => $paciente,
-            'data_consulta' => $data,
-            'horario_consulta' => $time
+            'idMedico' => $medico,
+            'idPaciente' => $paciente,
+            'dataMarcada' => $data,
+            'horaMarcada' => $time
         ]);
 
         event(new Registered($agendamento));
@@ -54,10 +55,10 @@ class AgendamentoController extends Controller
         return redirect()->back();
     }
 
-    public function efetuar(Request $request){
+    public function efetuar(Request $request) {
         $agendamento = Agendamento::find($request->id);
 
-        $agendamento->efetuada = 1;
+        $agendamento->concluida = 1;
 
         $agendamento->save();
 
@@ -65,28 +66,28 @@ class AgendamentoController extends Controller
         
     }
 
-    public function editar(Request $request){
+    public function editar(Request $request) {
 
         $dia = Carbon\Carbon::now();
-        $dia_atual = $dia->toDateString();
+        $diaAtualString = $dia->toDateString();
 
-        if($dia_atual > $request->data_consulta){
-            return redirect()->back()->with('warning', 'Não é possível marcar uma consulta para um dia anterior ao atual');
+        if ($diaAtualString > $request->dataMarcada) {
+            return redirect()->back()->with('erro', 'Não é possível marcar uma consulta para um dia anterior ao atual');
         }
 
-        if($consulta = Agendamento::first() != null){
-            $consulta = Agendamento::first()->where('med_id', Auth::user()->id)->where('data_consulta', $request->data_consulta)->where('horario_consulta', $request->horario_consulta)->where('efetuada', 0)->get();
-            if(count($consulta) > 0){
-                return redirect()->back()->with('warning', 'Já existe uma consulta marcada neste horário');
+        if ($consulta = Agendamento::first() != null) {
+            $consulta = Agendamento::first()->where('idMedico', Auth::user()->id)->where('dataMarcada', $request->dataMarcada)->where('horaMarcada', $request->horaMarcada)->where('concluida', 0)->get();
+            if (count($consulta) > 0) {
+                return redirect()->back()->with('erro', 'Já existe uma consulta marcada neste horário');
             }
         }
 
         Agendamento::find($request->id)->update([
-            'pac_id'=>$request->paciente,
-            'data_consulta'=>$request->data_consulta,
-            'horario_consulta' => $request->horario_consulta
+            'idPaciente'=>$request->paciente,
+            'dataMarcada'=>$request->dataMarcada,
+            'horaMarcada' => $request->horaMarcada
         ]);
 
-        return redirect()->route('home')->with('msg', 'Consulta editada com sucesso!');
+        return redirect()->route('home')->with('sucesso', 'Consulta editada com sucesso!');
     }
 }

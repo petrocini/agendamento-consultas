@@ -32,7 +32,7 @@ class AuthController extends Controller
     }
 
     public function home(){
-        $consultas = Agendamento::all()->where('efetuada', 0)->where('med_id', Auth::user()->id);
+        $consultas = Agendamento::all()->where('concluida', 0)->where('idMedico', Auth::user()->id);
         return view('home', ['consultas' => $consultas]);
     }
 

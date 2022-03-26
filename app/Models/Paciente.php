@@ -12,7 +12,7 @@ class Paciente extends Model
         'cpf',
     ];
 
-    public function agendamentos(){
+    public function agendamentos() {
         return $this->hasMany('App\Models\Agendamento');
     }
 }

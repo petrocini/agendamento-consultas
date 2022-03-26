@@ -20,15 +20,15 @@
             <input type="submit" class="btn btn-primary" @if($edit ?? '') value="Editar Paciente" @else value="Registrar Paciente"@endif>
         </div>
 
-        @if (session('sucess'))
+        @if (session('sucesso'))
             <div class="alert alert-success" role="alert">
-                {{session('sucess')}}
+                {{session('sucesso')}}
             </div>
         @endif
         
-        @if (session('warning'))
+        @if (session('erro'))
         <div class="alert alert-danger" role="alert">
-            {{session('warning')}}
+            {{session('erro')}}
         </div>
         @endif
 

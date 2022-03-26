@@ -45,7 +45,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function agendamentos(){
+    public function agendamentos() {
         return $this->hasMany('App\Models\Agendamento');
     }
 }
