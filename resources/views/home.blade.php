@@ -8,6 +8,11 @@
     <h2> Seja bem - vindo ao sistema de gerenciamento para consultas médicas, por favor, crie um médico para iniciar a criação ! </h2>
 @else
     <table class="table">
+
+        @if(Auth::user()->hasRole('medico'))
+        <a href="{{ route ('agendar')}}"><h3>Nova Consulta</h3></a>
+        @endif
+        
         <thead class="thead-dark">
             <th>Paciente: </th>
             <th>Data: </th>

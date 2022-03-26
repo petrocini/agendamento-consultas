@@ -9,10 +9,6 @@
             <li><a class="dropdown-item" href="{{ route ('logout')}}">Sair</a></li>
             <li><a class="dropdown-item" href="{{ route('home')}}">Consultas</a></li>
 
-            @if(Auth::user()->hasRole('medico'))
-            <li><a class="dropdown-item" href="{{ route ('agendar')}}">Agendar Consulta</a></li>
-            @endif
-
             <li><a class="dropdown-item" href="{{ route ('listaPaciente')}}">Pacientes</a></li>
 
             @if(Auth::user()->hasRole('admin'))
