@@ -86,13 +86,6 @@ class MedicoController extends Controller
 
         $crmCompleto = $crm . '/' . $uf;
 
-        if ($medico = User::first() != null) {
-            $medico = User::first()->where('crm', $crmCompleto)->get();
-            if(count($medico) > 0) {
-                return redirect()->back()->with('erro', 'Já existe um médico cadastrado com este CRM');
-            }
-        }
-
         User::find($request->id)->update([
             'name' => $request->name,
             'login' => $request->login,
