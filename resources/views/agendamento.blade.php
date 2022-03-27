@@ -11,7 +11,7 @@
             <label for="pacientes">Selecione um paciente:</label>
             <select class="form-control" name="paciente" id="pacientes">
                 @foreach($pacientes as $paciente)
-                    <option @if($edit ?? '') @if($consulta->pac_id == $paciente->id) selected @endif @endif value="{{$paciente->id}}">{{$paciente->name}}</option>
+                    <option @if($edit ?? '') @if($consulta->idPaciente == $paciente->id) selected @endif @endif value="{{$paciente->id}}">{{$paciente->name}}</option>
                 @endforeach
             </select>
         </div>

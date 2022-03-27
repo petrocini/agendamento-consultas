@@ -29,10 +29,11 @@ class PacienteController extends Controller
         
         $request->validate(
             [
-                'cpf' => 'required|integer'
+                'cpf' => 'required|integer|unique:pacientes'
             ],
             [
                 'integer' => 'O CPF deve possuir somente números',
+                'unique' => 'CPF já cadastrado'
             ]
         );
 
@@ -47,6 +48,15 @@ class PacienteController extends Controller
     }
 
     public function editar(Request $request) {
+
+        $request->validate(
+            [
+                'cpf' => 'required|integer'
+            ],
+            [
+                'integer' => 'O CPF deve possuir somente números',
+            ]
+        );
 
         Paciente::find($request->id)->update([
             'name'=>$request->name,
