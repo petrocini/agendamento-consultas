@@ -8,11 +8,11 @@
         <div class="register_inputs">
             <div class="form-group">
                 <label for="name">Nome do médico: </label>
-                <input type="text" name="name" class="form-control" @if($edit ?? '') value="{{ $medico->name}}"@endif required>
+                <input type="text" name="name" class="form-control" @if($edit ?? '') value="{{$medico->name}}"@endif required>
             </div>
             <div class="form-group">
                 <label for="name">Login: </label>
-                <input type="text" name="login" class="form-control" @if($edit ?? '') value="{{ $medico->login}}" @endif required>
+                <input type="text" name="login" class="form-control" @if($edit ?? '') value="{{$medico->login}}" @endif required>
             </div>
             <div class="form-group">
                 <label for="name">Senha: </label>
@@ -21,9 +21,9 @@
             <div class="form-group">
                 <label for="name">CRM: </label>
                 <div class="input-group">
-                    <input type="text" minlength="6" maxlength="6" name="crm" class="form-control" value="000000" min="0" max="999999" required>
+                    <input type="text" minlength="6" maxlength="6" min="0" max="999999" name="crm" class="form-control" @if($edit ?? '') value="{{substr($medico->crm, 0, 6)}}" readonly @endif required>
                     <div class="input-group-append">
-                        <select name="uf" class="form-control">
+                        <select name="uf" class="form-control" >
                             <option value="AC">AC</option>
                             <option value="AL">AL</option>
                             <option value="AM">AM</option>
@@ -61,6 +61,11 @@
             @if (session('msg'))
                 <div class="alert alert-success" role="alert">
                     {{session('msg')}}
+                </div>
+            @endif
+            @if (session('erro'))
+                <div class="alert alert-danger" role="alert">
+                    {{session('erro')}}
                 </div>
             @endif
             @if (session('warning'))
