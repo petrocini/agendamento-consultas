@@ -21,3 +21,4 @@
 <h3> 6 - Utilize o comando "php artisan db:seed" para inserir um usuário admin</h3>
 <h3> 7 - Configure um servidor apache e insira o projeto dentro dele, ou utilize o comando "php artisan serve"</h3>
 <h3> 8 - Entre no programa inserindo o usuário "admin" e senha "admin"</h3>
+<h3> 9 - Para testar a API, utilize um API CLIENTE(recomenda-se Postman ou Insomnia) com a URL: *endereço do seu servidor*/api/consultas/*id do médico*</h3>
