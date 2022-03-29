@@ -5,6 +5,9 @@
 <h3> - Laratrust utilizado para auxilio de autenticação e controle de usuários</h3>
 <h3> - Utilizando Boostrap, HTML e CSS para o front-end</h3>
 
+<h3> - Download XAMPP(PHP, Apache e MySQL): https://www.apachefriends.org/xampp-files/8.1.4/xampp-windows-x64-8.1.4-1-VS16-installer.exe</h3>
+<h3> - Download composer: https://getcomposer.org/Composer-Setup.exe</h3>
+
 <h2> Para testes</h2>
 
 <h3> 1 - Em uma pasta detinada ao projeto, utilizando os comandos : </h3>
