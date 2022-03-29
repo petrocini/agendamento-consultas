@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\ConsultasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/consultas/require', [ConsultasController::class, 'consultas']);
+Route::get('/consultas/{id}', [ConsultasController::class, 'getConsultas']);
